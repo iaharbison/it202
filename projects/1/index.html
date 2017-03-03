@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chicago Crime Data Search</title>
+
+
+    <style>
+        #form {
+            background-color: lightgreen;
+            border:20px black ;
+            width: 100%;
+            height: 800px;
+            font-size: 160%;
+            font-family: Arial;
+        }
+        
+        div {
+            background-color: lightblue;
+            border: 30px black;
+            border-radius: 20px;
+            min-height: 250px;
+            padding-top: 5px;
+            padding-right: 5px;
+            padding-bottom: 5px;
+            padding-left: 0px;
+            text-align: center;
+            height: 250px;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        h1{ font-size: 160%;
+            font-family:Arial
+        }
+        h2{ font-size: 160%;
+        font-family:Arial;
+        }
+        p{ font-size: 160%;
+        font-family:Arial;
+        }
+    </style>
+
+    <div id="form">
+        <p>
+          Chicago Crime Data Search
+            </p>
+            <h3>The scroll bar allows you to select the crime you are looking for. Select one and click search. When searching for a new crime, refresh the page before doing so. Our second action is a reference to google maps based on the longitude and latitude values. However since some do not have longitude and latitude values some return undefined.</h3>
+            <a href = "http://www.chicagonow.com/blogs/chicago-muckrakers/assets_c/2010/06/PoliceDistrictMurderRateMap2-thumb-580x600-165718.jpg">Click here for districts</a>
+            
+            <p>Ben Huynh and Isabella Harbison
+                </p>
+                <p>
+                Period 1
+                </p>
+            
+            <br>
+
+<select id="select">
+    <option id="ASSAULT">ASSAULT</option>
+    <option id="BATTERY">BATTERY</option>
+    <option id="NARCOTICS">NARCOTICS</option>
+    <option id="PROSTITUTION">PROSTITUTION</option>
+    <option id="ROBBERY">ROBBERY</option>
+    <option id="THEFT">THEFT</option>
+</select>
+
+            
+            
+            <form action="demo_form.asp">
+  District: <input type="text" id="district"><br>
+
+  <button type="button" id="btnSearch">Search</button>
+  
+</form>
+
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        var crime;
+
+        var baseURL = 'https://data.cityofchicago.org/resource/6zsd-86xi.json';
+
+        var filters ='?primary_type=';
+       
+        var lat = value.latitude;
+        var lon = value.longitude;
+
+        var url = baseURL + filters;
+
+        console.log(url)
+
+        $(
+
+            $("#btnSearch").on("click", function() {
+
+                $("#results").html("");
+
+                        var searchTerm = $("#select").val()
+                        
+                        var urlWithParams = url + searchTerm;
+                 var filters2 = '&district=';
+                 var url2 = urlWithParams + filters2
+                 $("results2").html("");
+                 var searchTerm2 = $("#district").val()
+                 var urlWithParams2 = url2 + searchTerm2
+                 console.log(urlWithParams2)
+
+
+                $.getJSON(urlWithParams2)
+                    .done(function(data) {
+
+                        console.log(data);
+                        $.each(data,
+                            function(index, value) {
+                                var html =
+                                    "<div class=" +
+                                    "<br> Case Number: " +
+                                    value.case_number +
+                                    "</br>" +
+                                    "<br>Case Type:" + 
+                                    value.primary_type +
+                                    "</br>" + 
+                                    "<br> Description: " + 
+                                    value.description +
+                                    "</br>" +
+                                    "<br>Block of the crime: " +
+                                    value.block +
+                                    "</br>" +
+                                    "<br>Date of the crime: " +
+                                    value.date +
+                                    "</br>" +
+                                    "<br>"+
+                                    "Location of the crime: "+
+                                    "<a href='http://google.com/maps?q="+  
+                                    value.latitude+ 
+                                    ","+
+                                    value.longitude+
+                                    "'>"+
+                                    "("+
+                                    value.latitude+
+                                    ", " +
+                                    value.longitude+
+                                    ")"+
+                                    "</a>"+
+                                    
+                                    "</div>";
+if (lat === undefined) {
+    lat.setAttribute("type", "hidden");
+    }
+    else { 
+    lat.setAttribute("defaultValue");
+    }
+    
+if (lon === undefined) {
+    lon.setAttribute("type", "hidden");
+    }
+    else { 
+    lon.setAttribute("defaultValue");
+    }
+                                $("body").append(html)
+
+                            })
+                    })
+            })
+            )
+    </script>
+</html>
