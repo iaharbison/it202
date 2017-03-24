@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Daily Horoscope</title>
+    <link rel="Stylesheet" media="all" href="styles.css" />
+    <link rel="shortcut icon" type="icon/x-icon" href="icon.jpg" />
+</head>
+
+<body>
+    <img class = "banner" src="horoscopebanner.jpg" />
+    <h2>What's your day going to be? Find out now!</h2>
+    <h4>If this is your first visit, scroll on down to your horoscope. Select your sign at from the bottom radial buttons, 
+so when you join us next time, your horoscope will be at the top of the list!</h4>
+<div class = "horoscopes" id="aries">
+    
+    <img class="signs" src="http://raredelights.com/wp-content/uploads/2013/09/aries.jpg" width="200" height="100" alt="Aries Sign" align="left" />
+</div>
+<div class = "horoscopes" id="taurus" >
+    <img class="signs" src ="http://7art-screensavers.com/screenshots/zodiac/taurus.jpg" width="200" height="100" alt="Taurus Sign" align="left" />
+</div>
+/* Rest of the signs and their horoscopes here */
+
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "http://theastrologer-api.herokuapp.com/api/horoscope/taurus/today";
+
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        myFunction(xmlhttp.responseText);
+    }
+}
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+function myFunction(response) {
+    var object = JSON.parse(response);
+    var out = "<p>";
+    out += object.horoscope + "</p>";
+    document.getElementById("taurus").innerHTML = out;
+}
+</script>
+
+</body>
+</html>
