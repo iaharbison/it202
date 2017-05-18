@@ -1,0 +1,240 @@
+<html>
+  <head>
+    <!-- Material Design Lite -->
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  </head>
+  <body>
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Bus Tracker</span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a id="link1" class="mdl-navigation__link" href="#">Home</a>
+            <a id="link2" class="mdl-navigation__link" href="#">Add Route/Stop</a>
+            <a id="link3" class="mdl-navigation__link" href="#">View Routes</a>
+          </nav>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Bus Tracker</span>
+        <nav class="mdl-navigation">
+          <a id="link1" class="mdl-navigation__link" href="#">Home</a>
+          <a id="link2" class="mdl-navigation__link" href="#">Add Route/Stop</a>
+          <a id="link3" class="mdl-navigation__link" href="#">View Routes</a>
+        </nav>
+      </div>
+
+            <main class="mdl-layout__content1">
+        <div id="screen1" class="page-content"> 
+        
+      <select id="route"></select>
+      <select id="directions"></select>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      
+      <script>
+               $(function( )  {
+        $("#screen1").show();
+        
+        $("#link1").on("click", function() {
+          $(".screen", ".mdl-layout__content2", ".mdl-layout__content3").hide();
+          $("#screen1").show();
+        });
+        
+        $("#link2").on("click", function() {
+          $(".screen", ".mdl-layout__content", ".mdl-layout__content3").hide();
+          $("#screen2").show();
+        });
+        
+        $("#link3").on("click", function() {
+          $(".screen", ".mdl-layout__content", ".mdl-layout__content2").hide();
+          $("#screen3").show();
+        });
+               });
+        
+      </script>
+<div class="groove">
+      <script>
+       
+        $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getpredictions?key=3gbTW5nqmzDQ9eEhzqZ7vukaM&rt=49&stpid=8417&format=json";
+          
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                     "key":"3gbTW5nqmzDQ9eEhzqZ7vukaM",
+                     "format": "json" }
+            }).done (function (data) {
+              console.log(data);
+              $("body").append("<h1>Western & Addison</h1>");
+             
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("body").append("Route #" + v.rt + " Time: " + v.prdctdn + " minutes" + "<br>");
+                
+              })
+
+            });
+        });
+         
+ </script>
+</div>
+ <div class="groove">
+ <script>
+  $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getpredictions?key=3gbTW5nqmzDQ9eEhzqZ7vukaM&rt=152&stpid=12569&format=json";
+          
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                     "key":"3gbTW5nqmzDQ9eEhzqZ7vukaM",
+                     "format": "json" }
+            }).done (function (data) {
+              console.log(data);
+              $("body").append("<h1>Addison & Western</h1>");
+             
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("body").append("Route #" + v.rt + " Time: " + v.prdctdn + " minutes" + "<br>");
+                
+              })
+
+            });
+        });
+    </script>
+    </div>
+    
+    <div class="groove">
+      <script>
+  $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getpredictions?key=3gbTW5nqmzDQ9eEhzqZ7vukaM&rt=52&stpid=17787&format=json";
+          
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                     "key":"3gbTW5nqmzDQ9eEhzqZ7vukaM",
+                     "format": "json" }
+            }).done (function (data) {
+              console.log(data);
+              $("body").append("<h1>California & Addison</h1>");
+             
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("body").append("Route #" + v.rt + " Time: " + v.prdctdn + " minutes" + "<br>");
+                
+              })
+
+            });
+        });
+            
+  
+  
+</script>
+ </div>
+ </div>
+      </main>
+      <main class="mdl-layout__content2">
+        <div id="screen2" class="page-content"> 
+        
+      <script>
+        $(function() {
+        
+        var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+        var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getroutes?key=3gbTW5nqmzDQ9eEhzqZ7vukaM&format=json";
+        $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                     "key":"3gbTW5nqmzDQ9eEhzqZ7vukaM",
+                     "format": "json" }
+            }).done (function (data) {
+              
+             
+               // load options into a select controle
+             $.each(data["bustime-response"]["routes"], function(i,v) {
+                  var option = $("<option>");   // creates an option element
+                  option.attr("value", v.rt );   // set value
+                  option.text(v.rt + " - " + v.rtnm);  // set text
+                  $("#routes").append(option);   // add option to select control
+              })
+      });
+    console.log(data);
+    $("#routes").on("change", function() {
+              var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getdirections";
+
+            $.ajax({
+                url: apiPassThruUrl,
+                dataType: "json",
+                method: 'GET',
+                data: {"apiEndpoint": apiEndpoint,
+                        "key" : "3gbTW5nqmzDQ9eEhzqZ7vukaM",
+                        "format":"json",
+                        "rt": $("#routes").val()
+                }
+              }).done (function (data) {
+                //console.log(data);
+               
+                // load options into a select controle
+               
+               $("#directions option").remove();
+               
+               $.each(data["bustime-response"]["directions"], function(i,v) {
+                    var option = $("<option>");   // creates an option element
+                    option.attr("value", v.dir );   // set value
+                    option.text(v.dir);  // set text
+                    $("#directions").append(option);   // add option to select control
+                })
+              
+              
+
+
+            });            
+            
+            
+            
+          });
+          
+    
+            
+        });
+    // fix header blocking h1, mdl-layout__content2
+          
+        
+      
+        
+      </script>
+        
+        
+        
+        
+      </main>
+      
+    </div>
+  </body>
+</html>
