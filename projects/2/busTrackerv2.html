@@ -160,7 +160,7 @@
       </main>
       <main class="mdl-layout__content2">
         <div id="screen2" class="page-content"> 
-        
+          <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
       <script>
         $(function() {
         
@@ -224,8 +224,26 @@
             
         });
     // fix header blocking h1, mdl-layout__content2
-          
-        
+    
+  
+          var db = new Dexie('BusTracker');
+        db.version(1).stores({
+	      stops: '++id, rt, rtnm, dir, stpid, stpnm'
+	});
+
+db.stops.add({
+		rt: '49',
+		rtnm: 'Western'
+		dir: 'Northbound'
+		stpid: '12345'
+		stpnm: "Addison"
+	});
+
+db.stops
+		.each (function (stop) {
+			console.log (stop.stpid);
+		});
+
       
         
       </script>

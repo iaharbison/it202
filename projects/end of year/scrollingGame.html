@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    
+      <style>
+    canvas {
+      border: #333 10px solid;
+    }
+  </style>
+    
+    
+    
+  </head>
+  <body>
+ 
+  <canvas id="myCanvas" width="650px" height="500px"></canvas>
+      
+    
+    
+    <script>
+    var canvas = document.querySelector("#myCanvas");
+var context = canvas.getContext("2d");
+   
+    
+      var livesRemaining = 3;
+      var score = 0;
+      var paused = false;
+  
+     
+     
+      function animate() {
+      
+      var myBackground = new Image();
+myBackground.src = "https://timenewsfeed.files.wordpress.com/2011/08/school_hallway.jpg?w=455";
+myBackground.addEventListener("load", loadImage, false);
+ 
+ var myPlayer = new Image();
+ context.clearRect(0, 0, canvas.width, canvas.height);
+ myPlayer.src = "https://s-media-cache-ak0.pinimg.com/originals/3b/bf/6a/3bbf6ad9ecd10ecad802d84d4119bccf.jpg";
+ myPlayer.addEventListener("load", loadImage, false);
+var deltaX=0;
+var deltaY=0;
+ 
+   window.addEventListener("keydown", moveSomething, false);
+ 
+ function moveSomething(e) {
+    switch(e.keyCode) {
+     
+        case 38:
+            // up key pressed
+            deltaY+=2;
+            
+            break;
+     
+        case 40:
+            // down key pressed
+            deltaY-=2;
+            
+            break;  
+    }   
+}
+      
+ 
+ var myHarm = new Image();
+ myHarm.src = "http://images.clipartpanda.com/homework-clipart-jRiARd6cL.png";
+ myHarm.addEventListener("load", loadImage, false);
+ 
+ var myBenefit = new Image();
+ myBenefit.src="http://weknownyourdreamz.com/images/money/money-02.jpg";
+ myBenefit.addEventListener("load", loadImage, false);
+ 
+function loadImage(e) {
+ context.drawImage(myBackground, 0, 0, canvas.width, canvas.height);
+ context.drawImage(myPlayer, 0, 0, 105 + deltaX, 125 + deltaY);
+ context.drawImage(myHarm, 150, 150, 95, 95);
+ context.drawImage(myBenefit, 0, 150, 95, 95);
+}  
+
+
+drawImage();
+      /*
+      
+        main animation loop
+      
+      */
+     //clear canvas
+        
+        // update harm and benefit y coordinates
+        
+        
+      
+  
+        
+        // check for and handle edge condition
+        
+        // check for and handle harm collision
+      if (myPlayer.x < myHarm.x + myHarm.width &&
+   myPlayer.x + myPlayer.width > myHarm.x &&
+   myPlayer.y < myHarm.y + myHarm.height &&
+    myPlayer.height + myPlayer.y > myHarm.y) {
+    // collision detected!
+}
+
+if (myPlayer.x < myBenefit.x + myBenefit.width &&
+   myPlayer.x + myPlayer.width > myBenefit.x &&
+   myPlayer.y < myBenefit.y + myBenefit.height &&
+   myPlayer.height + myPlayer.y > myBenefit.y) {
+    // collision detected!
+}
+
+
+    
+        
+        // check for and handle edge condition
+        
+        // check for benefit collision
+        
+        // draw text (lives and score)
+        context.font = "bold 36px Helvetica, Arial, sans-serif";
+context.fillText("Lives: 3", 450, 30);
+        context.font = "bold 36px Helvetica, Arial, sans-serif";
+context.fillText("Score: 0", 450, 75);
+        
+        //  if the game has not been paused, 
+        if (!paused) {
+          requestAnimationFrame(animate);
+        }
+        
+     } 
+      animate();
+      
+      //  event handler for moving player
+      //    use onKeyPress event, and change the player.y value based on the up/down keys
+
+      
+      
+      
+    </script>
+    
+    
+  </body>
+</html>
